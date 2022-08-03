@@ -26,6 +26,7 @@ class OrderTraceChart extends Component {
 
   componentDidUpdate() {
     console.log('update')
+    console.log(this.props);
     //持续更新
     if (this.myChart) {
       this.myChart.resize();
@@ -81,7 +82,8 @@ class OrderTraceChart extends Component {
             align: 'left'
           }
         },
-        align: 'center',
+        // align: 'center',
+        align: 'left',
         verticalAlign: 'bottom'
       },
     }

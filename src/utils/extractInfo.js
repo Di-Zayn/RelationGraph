@@ -70,7 +70,6 @@ export function extractTraces(orders, traces) {
   const list = traces.list
   let orderTrace = []
 
-  console.log('!!', list)
   for (let trace in list) {
     // items存储该轨迹中出现的所有任务
     let items = []

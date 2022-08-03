@@ -74,6 +74,9 @@ export default {
 
       state.historyOrder = eqs
       state.orderTrace = traces
+      console.log(eqs)
+      console.log(state.historyOrder)
+      console.log(state.eqDict)
 
       return { ...state}
     },
@@ -106,6 +109,11 @@ export default {
       return { ...state }
 
     },
+
+    // cleanHistoryOrders(state, { payload }) {
+    //   historyOrder
+    //   return { ...state }
+    // },
 
     // 被使用了 但在IDE中可能显示未被使用
     getEqDictUpdate(state, { payload }) {
@@ -178,10 +186,6 @@ export default {
 
     //新添加
     *updateChart({ payload: Info }, { call, put }) {
-      yield put({
-        type: 'handleChartVisible',
-        payload: true,
-      });
       const eqs = yield call(getHistoryOrder, Info);
       const traces = yield call(getOrderTrace, Info);
       yield put({
@@ -190,6 +194,10 @@ export default {
           eqs: eqs,
           traces: traces
         },
+      });
+      yield put({
+        type: 'handleChartVisible',
+        payload: true,
       });
     },
 
