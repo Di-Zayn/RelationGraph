@@ -1,0 +1,87 @@
+
+.login_header {
+    height: 144px;
+    background-color: #f0f2f5;
+    line-height: 44px;
+    text-align: center;
+}
+
+.login_footer {
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+}
+
+.login_content {
+    position: absolute; left: 0; top: 144px; right: 0; bottom: 70px;
+    margin: auto;
+    padding: 50px;
+    background-color: #f0f2f5;
+}
+
+.title {
+    color: black;
+    position: relative;
+    top: 20%;
+    font-weight: 600;
+    font-size: 33px;
+    font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
+
+.logo_img {
+    margin: 10px 10px;
+    height: 50px;
+    width: 64px;
+}
+
+.work_space_header {
+    background-color: #f0f2f5;
+    height: 100px;
+    box-shadow: inset 0 1px 5px -3px rgb(0 0 0 / 20%);
+}
+
+.work_space_content {
+    background-color: #FFF;
+    /* height: 100%; */
+    padding: 20px 20px 20px 20px;
+    position: absolute;
+    width: calc(100% - 200px);
+    top: 100px;
+    left: 200px;
+    right: 0px;
+    bottom: 70px;
+    overflow-y: auto;
+    /* position: relative; */
+}
+
+.work_space_footer {
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    box-shadow: inset 0 1px 5px -3px rgb(0 0 0 / 20%);
+}
+
+.work_space_sider { 
+    position: absolute;
+    top: 100px;
+    bottom: 70px;
+    background-color: #f0f2f5;
+}
+
+.loader {
+    background-color: #fff;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    text-align: center;
+  }
+

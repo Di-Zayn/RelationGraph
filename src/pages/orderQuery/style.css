@@ -1,0 +1,22 @@
+
+.orderForm {
+    padding:20px;
+    box-shadow: 0 0 20px 0px rgb(0 0 0 / 8%);
+    background-color: white;
+    height: 550px;
+}
+
+.orderWindow {
+    margin-left:20px;
+    padding:20px;
+    box-shadow: 0 0 20px 0px rgb(0 0 0 / 8%);
+    height: 550px;
+
+}
+.orderTable {
+    margin-top: 20px;
+}
+
+.table {
+    font-size: 10px;  
+}

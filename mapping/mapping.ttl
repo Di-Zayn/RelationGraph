@@ -1,0 +1,146 @@
+
+# D2RQ Namespace
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+# Namespace of the ontology
+@prefix : <http://relation_graph/SIPG/v1#> .
+
+# Namespace of the mapping file; does not appear in mapped data
+@prefix map: <file:////Users/cjt/Code/PycharmProjects/RelationGraph/mapping/mapping.ttl#> .
+
+# Other namespaces
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+map:SIPG_ECS_DB a d2rq:Database;
+    d2rq:jdbcDSN "jdbc:mysql://10.60.103.248:23306/SIPG_ECS_DB";
+    d2rq:jdbcDriver "com.mysql.jdbc.Driver";
+    d2rq:username "root";
+#    d2rq:password "root";
+.
+
+
+
+
+# -----------------------------------------------
+# CREATE TABLE Conferences (ConfID int, Name text, Location text);
+
+
+#任务ORDER: 开始坐标 :ST_LOCATION 作业类型 :MOVE_KIND 开始时间 :ST_TIME  结束时间 :RC_TIME 开始坐标 :ST_LOCATION
+map:ORDER a d2rq:ClassMap;
+    d2rq:dataStorage map:SIPG_ECS_DB;
+    d2rq:class :ORDER;
+    d2rq:condition "AGV_ORDERS.H_AGO_AGV_ID = '820'";
+    d2rq:uriPattern "http://order_@@AGV_ORDERS.H_AGO_ID@@";
+    .
+
+map:ST_LOCATION a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:ORDER;
+    d2rq:property :ST_LOCATION;
+    d2rq:column "AGV_ORDERS.H_AGO_ST_LOCATION";
+    d2rq:datatype xsd:string;
+    .
+
+map:MOVE_KIND a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:ORDER;
+    d2rq:property :MOVE_KIND;
+    d2rq:column "AGV_ORDERS.H_AGO_MOVE_KIND";
+    d2rq:datatype xsd:string;
+    .
+
+map:ST_TIME a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:ORDER;
+    d2rq:property :ST_TIME;
+    d2rq:join "AGV_ORDERS.H_AGO_ID => AGV_COMMAND.H_AGC_AGO_ID";
+    d2rq:column "AGV_COMMAND.H_AGC_STARTTM";
+    d2rq:datatype xsd:string;
+    .
+
+map:RC_TIME a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:ORDER;
+    d2rq:property :RC_TIME;
+    d2rq:join "AGV_ORDERS.H_AGO_ID => AGV_COMMAND.H_AGC_AGO_ID";
+    d2rq:column "AGV_COMMAND.H_AGC_RTC";
+    d2rq:datatype xsd:string;
+    .
+
+
+map:RC_LOCATION a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:ORDER;
+    d2rq:property :RC_LOCATION;
+    d2rq:join "AGV_ORDERS.H_AGO_ID => AGV_COMMAND.H_AGC_AGO_ID";
+    d2rq:column "AGV_COMMAND.H_AGC_ACTUAL_DESTINATION";
+    d2rq:datatype xsd:string;
+    .
+
+
+
+
+
+#路径 PATH_POINT  :BELONG_TO_ORDER  :ID  :INOUT_TP :INOUT_X :INOUT_Y :INOUT_TIME :INOUT_MILEAGE
+map:PATH_POINT a d2rq:ClassMap;
+    d2rq:dataStorage map:SIPG_ECS_DB;
+    d2rq:class :PATH_POINT;
+    d2rq:condition "AGV_COMMAND_TRACKS.H_ACT_AGV_ID = '820'";
+    d2rq:uriPattern "http://path_point_@@AGV_COMMAND_TRACKS.H_ACT_ID@@";
+    .
+
+map:BELONG_TO_ORDER a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:PATH_POINT;
+    d2rq:property :BELONG_TO_ORDER;
+    d2rq:refersToClassMap map:ORDER;
+    d2rq:join "AGV_ORDERS.H_AGO_AGC_ID => AGV_COMMAND_TRACKS.H_ACT_AGC_ID";
+    .
+
+map:INOUT_TP a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:PATH_POINT;
+    d2rq:property :INOUT_TP;
+    d2rq:column "AGV_COMMAND_TRACKS.H_ACT_INOUT_TP_ID";
+    d2rq:datatype xsd:string;
+    .
+
+map:ID a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:PATH_POINT;
+    d2rq:property :ID;
+    d2rq:column "AGV_COMMAND_TRACKS.H_ACT_ID";
+    d2rq:datatype xsd:integer;
+    .
+
+map:INOUT_X a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:PATH_POINT;
+    d2rq:property :INOUT_X;
+    d2rq:column "AGV_COMMAND_TRACKS.H_ACT_INOUT_X";
+    d2rq:datatype xsd:integer;
+    .
+
+map:INOUT_Y a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:PATH_POINT;
+    d2rq:property :INOUT_Y;
+    d2rq:column "AGV_COMMAND_TRACKS.H_ACT_INOUT_Y";
+    d2rq:datatype xsd:integer;
+    .
+
+map:INOUT_TIME a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:PATH_POINT;
+    d2rq:property :INOUT_TIME;
+    d2rq:column "AGV_COMMAND_TRACKS.H_ACT_INOUT_TP_TIME";
+    d2rq:datatype xsd:datetime;
+    .
+
+map:INOUT_MILEAGE a d2rq:PropertyBridge;
+    d2rq:belongsToClassMap map:PATH_POINT;
+    d2rq:property :INOUT_MILEAGE;
+    d2rq:column "AGV_COMMAND_TRACKS.H_ACT_MILEAGE";
+    d2rq:datatype xsd:integer;
+    .
+
+
+
+
+
+
+
+
+
+
+
+

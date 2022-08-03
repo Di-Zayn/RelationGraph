@@ -1,0 +1,27 @@
+
+
+
+.table {
+    font-size: 10px;
+}
+
+.diagnose{
+  color: red;
+  font-size: 10px;
+}
+
+.chartSpin{
+  text-align: center;
+  /* height:598px; */
+  padding: 100px;
+}
+
+.modal{
+  width: 950px;
+  height: 550px;
+}
+
+.chart{
+  width: 950px;
+  height: 550px;
+}
