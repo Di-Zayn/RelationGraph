@@ -1,4 +1,5 @@
 export default {
+  // 初始化时传入空trace
   'POST /getOrderTrace': (req, res) => {
     res.send({
       status: 'success',

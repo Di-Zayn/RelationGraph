@@ -12,10 +12,7 @@ import {
   Spin,
   DatePicker,
 } from 'antd';
-import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Link, connect } from 'umi';
-import { isPropertySignature } from 'typescript';
-import { Component } from 'react';
+import { connect } from 'umi';
 import style from './style.css';
 import ErrorTree from '@/utils/errorTree';
 import moment from 'moment';
@@ -330,11 +327,6 @@ const orderTraceSource = (props) => {
     </div>
   );
 };
-
-/* export default connect((state) => {
-  console.log('state', state)
-  return state.order_diagnose;
-})(orderDiagnose); */
 
 // connect()(orderTraceSource): 将数据注入到orderTraceSource组件中, 数据即为orderTraceSource对应入参props
 // props是一个obj, 具有很多属性 包括了整个组件树里的所有state

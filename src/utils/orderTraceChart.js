@@ -42,8 +42,6 @@ class OrderTraceChart extends Component {
     const orders = extractOrders(historyOrder, baseTime, eqDict)
     const traces = extractTraces(orders, orderTrace)
 
-    console.log(orders, traces, eqDict)
-
     const series = [...traces, ...orders]
     const originTime = new Date(baseTime)
 
@@ -225,9 +223,8 @@ class OrderTraceChart extends Component {
     this.myChart.setOption({
       graphic: graphicLines
     })
+    // 点击打开
     this.myChart.on('click', function(params) {
-      console.log('@',params.data.id)
-      console.log(this)
       _this.props.traceHistory({
         orderID: params.data.id
       })

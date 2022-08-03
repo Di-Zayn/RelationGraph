@@ -1,4 +1,5 @@
 export default {
+  // 初始化时传入一个eq的orders
   'POST /getHistoryOrder': (req, res) => {
     res.send({
       status: 'success',
@@ -20,6 +21,7 @@ export default {
       }
     })
   },
+  //  前端传入当前选中任务的id， 返回相关任务
   'POST /traceHistoryOrder': (req, res) => {
     const { orderID } = req.body
     if (orderID === 'O10') {

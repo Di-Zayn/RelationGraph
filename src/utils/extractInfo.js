@@ -108,8 +108,6 @@ export function extractTraces(orders, traces) {
       }
     }
 
-    console.log('!!', data)
-
     orderTrace.push({
       name: 'trace',
       type: 'line',
@@ -123,69 +121,3 @@ export function extractTraces(orders, traces) {
 
   return orderTrace
 }
-
-// 旧方法 默认是trace的顺序是 s-e-s-e
-// export function extractTraces(orders, traces) {
-//   // 解析出任务轨迹
-//   const list = traces.list
-//   let orderTrace = []
-//
-//   console.log('!!', list)
-//   for (let trace in list) {
-//     let last = ""
-//     let length = 1
-//     // items存储该轨迹中出现的所有任务
-//     let items = []
-//     for (let i in list[trace]) {
-//       last = list[trace][i]
-//       items.push(i)
-//       length++
-//     }
-//     items.push(last)
-//
-//     let temp = [...items]
-//
-//     // 假设trace涉及的任务数量要远少于总任务数
-//     // 先过滤
-//     let newOrders = orders.filter((el) => {
-//       for (let i = 0; i < temp.length; i++) {
-//         if (el.data[1].id == temp[i]) {
-//           temp.splice(i, 1) // 不断清空temp数组
-//           return true
-//         }
-//       }
-//       return false
-//     })
-//
-//     let data = []
-//     let idx = -1
-//     for (let i = 0; i < length; i++) {
-//       idx = newOrders.findIndex((el) => {
-//         return el.data[1].id == items[i]
-//       })
-//       if (i == 0) {
-//         data.push(newOrders[idx].data[1].value)
-//       } else if(i == length - 1) {
-//         data.push(newOrders[idx].data[0])
-//       } else {
-//         data.push(newOrders[idx].data[0])
-//         data.push(['-', 0]) //由于已经指定了'-', 纵坐标任意即可
-//         data.push(newOrders[idx].data[1].value)
-//       }
-//     }
-//
-//     console.log('!!', data)
-//
-//     orderTrace.push({
-//       name: 'trace',
-//       type: 'line',
-//       lineStyle: {
-//         width: 4,
-//         type: 'dashed'
-//       },
-//       data: data,
-//     })
-//   }
-//
-//   return orderTrace
-// }

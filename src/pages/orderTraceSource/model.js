@@ -83,17 +83,11 @@ export default {
       const eqs = payload.eqs, trace = payload.trace
 
       // 将新的eq信息写入
-      // 这里没有处理该情况： 传入的eq之前已经存在
+      // 这里默认了后续传入的order不会属于之前的eq
       for (let eq in eqs) {
         state.historyOrder.list[eq] = eqs[eq]
       }
 
-      // 如果希望多条trace且之间有区分:
-      // 新来的trace串中最后一个的尾节点是否与当前trace串的第一个的尾节点相同
-      // 相同则属于同一个trace串
-      // 该思路需要串是有序的
-      console.log('@', state.orderTrace.list)
-      console.log(trace)
       if (JSON.stringify(state.orderTrace.list) === "{}") {
         state.orderTrace.list['trace1'] = trace
       } else {
@@ -101,7 +95,6 @@ export default {
           state.orderTrace.list['trace1'][i] = trace[i]
         }
       }
-      console.log(state.orderTrace.list)
 
       state.eqDict = {}
       let idx = 1
@@ -114,9 +107,8 @@ export default {
 
     },
 
-    // 被使用了
+    // 被使用了 但在IDE中可能显示未被使用
     getEqDictUpdate(state, { payload }) {
-      console.log(payload)
       state.eqDict[payload.key] = payload.value
       return { ...state}
     },
@@ -161,7 +153,6 @@ export default {
     // call 调用异步函数 yield call (func, data)
     *updateTable({ payload: query }, { call, put }) {
       const rt = yield call(getOrders, query); // 调用接口
-      console.log(query)
       // 新增，用以修改baseTime
       yield put({
         type: 'getTimeUpdate',
